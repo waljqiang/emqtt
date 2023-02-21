@@ -4,10 +4,8 @@ ini_set('error_log', __DIR__ . './runtime/mqtt.log');
 use Waljqiang\Mqtt\Mqtt;
 
 try{
+	Mqtt::setDebug(true,4);
 	$mqtt = new Mqtt($config['address']);
-
-	//$mqtt->setDebug(true,4);
-
 	$mqtt->setClientID(uniqid());
 	$mqtt->setAuth($config['username'],$config['password']);
 

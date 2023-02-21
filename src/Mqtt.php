@@ -8,14 +8,17 @@ use sskaje\mqtt\Utility;
 /* phpMQTT */
 class Mqtt extends MqttServer{
 
-    public function __construct($server){
+    public function __construct($server,$options=[]){
         parent::__construct($server);
         # Set Socket Context
-        $context = stream_context_create();
-        $this->socket->setContext($context);
+        if(!empty($options)){
+            Debug::Log(Debug::DEBUG, 'config options:' . var_export($options,true));
+            $context = stream_context_create($options);
+            $this->socket->setContext($context);
+        }
     }
 
-    public function setDebug($status,$level = Debug::NOTICE){
+    public static function setDebug($status,$level = Debug::NOTICE){
         $status ? Debug::Enable() : Debug::Disable();
         Debug::SetLogPriority($level);
     }

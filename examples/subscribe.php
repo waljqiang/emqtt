@@ -18,13 +18,8 @@ class CallBack extends MessageHandler{
 }
 
 try{
-
-
-
+	Mqtt::setDebug(true,4);
 	$mqtt = new Mqtt($config['address']);
-
-	//$mqtt->setDebug(true,4);
-
 	$mqtt->setClientID(uniqid());
 	$mqtt->setAuth($config['username'],$config['password']);
 	$mqtt->setKeepalive(60);
